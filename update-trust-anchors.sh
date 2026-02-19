@@ -56,6 +56,28 @@ if [ -n "${CA_BUNDLE_SECRET_TARGET}" ]; then
 
 fi
 
+if [ -n "${JAVA_BUNDLE_TARGET}" ]; then
+  echo "Updating Java cacerts keystore..."
+  java_rpm_pattern=openjdk-headless
+  java_rpm=$(rpm -qa | grep ${java_rpm_pattern} | head -1)
+  if [ -n "${java_rpm}" ]; then
+    cacerts_file=$(rpm -q ${java_rpm} -l | grep cacert)
+    cp ${cacerts_files} ${JAVA_BUNDLE_TARGET}/cacerts
+    for c in /etc/grid-security/certificates/*.pem; do
+      # Prefix alias with IGTF- to prevent any collision with an existing alias in cacerts
+      ca_alias=IGTF-$(basename ${c} .pem)
+      echo ca_alias=$ca_alias
+      keytool -importcert -trustcacerts -noprompt \
+	      -alias ${ca_alias} \
+  	      -keystore ${JAVA_BUNDLE_TARGET}/cacerts \
+  	      -file ${c} -storepass changeit
+    done
+  else
+    echo "Java RPM (${java_rpm_pattern}) not installed: cannot update Java cacerts keystore"
+    exit 1
+  fi
+fi
+
 if [ $# -gt 0 ]; then
   echo "Certificate copy requested to $1"
   rsync -avu -O --no-owner --no-group --no-perms /etc/grid-security/certificates/ $1
