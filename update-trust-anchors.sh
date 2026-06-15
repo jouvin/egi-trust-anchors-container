@@ -34,8 +34,7 @@ cat $DEST/pem/tls-ca-bundle.pem $DEST/pem/tls-ca-bundle-client.pem > $DEST/pem/t
 TRUST_ANCHORS_TARGET=${TRUST_ANCHORS_TARGET:=$1}
 CA_BUNDLE_TARGET=${CA_BUNDLE_TARGET:=}
 
-if [ ${REMOVE_OBSOLETE_FILES_FROM_TARGET} -eq 1 ]
-then
+if [ ${REMOVE_OBSOLETE_FILES_FROM_TARGET} -eq 1 ]; then
   delete_options='--delete'
   delete_msg='and removing obsolete file from it'
 else
