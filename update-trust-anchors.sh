@@ -29,9 +29,7 @@ DEST=/etc/pki/ca-trust/extracted
 /usr/bin/p11-kit extract --comment --format=pem-bundle --filter=ca-anchors --overwrite --purpose client-auth $DEST/pem/tls-ca-bundle-client.pem
 cat $DEST/pem/tls-ca-bundle.pem $DEST/pem/tls-ca-bundle-client.pem > $DEST/pem/tls-ca-bundle-all.pem
 
-# For backward compatibility, allow to define TRUST_ANCHORS_TARGET as a script parameter rather
-# than defining the variable
-TRUST_ANCHORS_TARGET=${TRUST_ANCHORS_TARGET:=$1}
+TRUST_ANCHORS_TARGET=${TRUST_ANCHORS_TARGET:=}
 CA_BUNDLE_TARGET=${CA_BUNDLE_TARGET:=}
 
 if [ ${REMOVE_OBSOLETE_FILES_FROM_TARGET} -eq 1 ]; then
