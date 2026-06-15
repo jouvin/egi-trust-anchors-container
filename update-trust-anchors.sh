@@ -1,9 +1,9 @@
 #!/bin/bash
 set -ex
 
-# Variable to remove from CA_BUNDLE_TARGET files no longer existing in /etc/pki
+# Variable to remove from the targets the CA files no longer existing in /etc/pki
 # Disabled by default (backward compatibility)
-REMOVE_OBSOLETE_FILES_FROM_TARGET=${REMOVE_OBSOLETE_FILES_FROM_TARGET:-0}
+REMOVE_OBSOLETE_FILES_FROM_TARGET=${REMOVE_OBSOLETE_FILES_FROM_TARGET:=}
 
 # fetch-crl timeout
 FETCH_CRL_TIMEOUT_SECS=${FETCH_CRL_TIMEOUT_SECS:-5}
