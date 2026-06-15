@@ -37,9 +37,6 @@ CA_BUNDLE_TARGET=${CA_BUNDLE_TARGET:=}
 if [ ${REMOVE_OBSOLETE_FILES_FROM_TARGET} -eq 1 ]; then
   delete_options='--delete'
   delete_msg='and removing obsolete file from it'
-else
-  delete_options=''
-  delete_msg=''
 fi
 
 if [ -n "${TRUST_ANCHORS_TARGET}" ]; then
