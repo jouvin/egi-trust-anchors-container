@@ -94,5 +94,5 @@ fi
 
 if [ $# -gt 0 ]; then
   echo "Copying trust anchors to $1 ${delete_msg}"
-  rsync -avu -O --no-owner --no-group --no-perms /etc/grid-security/certificates/ $1
+  rsync -avu ${delete_options} -O --no-owner --no-group --no-perms /etc/grid-security/certificates/ $1
 fi
