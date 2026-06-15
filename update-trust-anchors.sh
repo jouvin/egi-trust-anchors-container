@@ -93,6 +93,6 @@ if [ -n "${JAVA_BUNDLE_TARGET}" ]; then
 fi
 
 if [ $# -gt 0 ]; then
-  echo "Certificate copy requested to $1"
+  echo "Copying trust anchors to $1 ${delete_msg}"
   rsync -avu -O --no-owner --no-group --no-perms /etc/grid-security/certificates/ $1
 fi
