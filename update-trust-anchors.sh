@@ -23,8 +23,8 @@ done
 
 update-ca-trust extract
 
-## Updated CA trust does not include trust anchors that can sign client-auth certs,
-## which looks like a bug: readd it after extracting the new trust.
+## update-ca-trust does not include trust anchors that can sign client-auth certs,
+## which looks like a bug: re-add them after extracting the new trust.
 DEST=/etc/pki/ca-trust/extracted
 /usr/bin/p11-kit extract --comment --format=pem-bundle --filter=ca-anchors --overwrite --purpose client-auth $DEST/pem/tls-ca-bundle-client.pem
 cat $DEST/pem/tls-ca-bundle.pem $DEST/pem/tls-ca-bundle-client.pem > $DEST/pem/tls-ca-bundle-all.pem
